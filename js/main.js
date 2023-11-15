@@ -134,25 +134,18 @@ for (const nombreEscala in escalas) {
     selectEscala.append(option);
 }
 
-const tonalidadGuardada = localStorage.getItem('tonalidad')
-const escalaGuardada = localStorage.getItem('escala')
+function cargarEscalaGuardada() {
+    const tonalidadGuardada = localStorage.getItem('tonalidad')
+    const escalaGuardada = localStorage.getItem('escala')
 
-if (tonalidadGuardada && escalaGuardada) {
-    const escala = notasParaEscala(tonalidadGuardada, escalaGuardada)
+    if (tonalidadGuardada && escalaGuardada) {
+        const escala = notasParaEscala(tonalidadGuardada, escalaGuardada)
+        selectTonica.value = tonalidadGuardada;
+        selectEscala.value = escalaGuardada;
 
-    // for (const intervalo in escala) {
-    //     let boton = document.getElementById(escala[intervalo]);
-    //     if (boton) {
-    //         boton.style.backgroundColor = 'red';
-    //     }
-    // }
+        resaltarEscala(escala)
+    }
 
-    // // Resaltar la tonica
-    // let botonTonica = document.getElementById(tonalidadGuardada);
-    // if (botonTonica) {
-    //     botonTonica.style.backgroundColor = 'green';
-    // }
-    resaltarEscala(escala)
 }
 
 function renderizarTeclado() {
@@ -193,6 +186,33 @@ function renderizarTeclado() {
 
 function resaltarEscala(escala) {
     // ... tusha
+    const keys = document.querySelectorAll('.key');
+
+
+    keys.forEach(key => {
+
+        key.style.backgroundColor = '';
+
+
+        for (const intervalo in escala) {
+            const nota = escala[intervalo]
+            if (nota.includes("#")) {
+                if (key.className.includes(nota.replace("#", "-sost"))) {
+                    key.style.backgroundColor = intervalo === 'tonica' ? 'green' : 'red';
+                    console.log(key.className, escala[intervalo]);
+
+                }
+            } else {
+                if (key.className.includes(nota) && !key.className.includes('-sost')) {
+                    key.style.backgroundColor = intervalo === 'tonica' ? 'green' : 'red';
+                }
+
+            }
+        }
+    });
+
+
 }
 
 renderizarTeclado()
+cargarEscalaGuardada()

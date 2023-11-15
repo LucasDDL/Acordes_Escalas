@@ -47,10 +47,12 @@ body {}
 .accidentals div {
     width: 24px;
     height: 76px;
+    border: 1px solid transparent;
 }
 
 .accidentals .key {
     background-color: black;
+    border-color: black;
 }
 
 .accidentals .spacer {
