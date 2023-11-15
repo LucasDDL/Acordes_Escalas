@@ -1,71 +1,4 @@
-// const acordes = {
-//     C: ['C', 'E', 'G'],
-//     Caug: ['C', 'E', 'G#'],
-//     Cm: ['C', 'Eb', 'G'],
-//     Cdim: ['C', 'Eb', 'Gb'],
-//     D: ['D', 'F#', 'A'],
-//     Dm: ['D', 'F', 'A'],
-//     Ddim: ['D', 'F', 'Ab'],
-//     Daug: ['D', 'F#', 'A#'],
-//     E: ['E', 'G#', 'B'],
-//     Eaug: ['E', 'G#', 'C'],
-//     Em: ['E', 'G', 'B'],
-//     Edim: ['E', 'G', 'Bb'],
-//     F: ['F', 'A', 'C'],
-//     Fm: ['F', 'Ab', 'C'],
-//     Fdim: ['F', 'Ab', 'Cb'],
-//     Faug: ['F', 'A', 'C#'],
-//     G: ['G', 'B', 'D'],
-//     Gm: ['G', 'Bb', 'D'],
-//     Gdim: ['G', 'Bb', 'Db'],
-//     Gaug: ['G', 'B', 'D#'],
-//     A: ['A', 'C#', 'E'],
-//     Am: ['A', 'C', 'E'],
-//     Adim: ['A', 'C', 'Eb'],
-//     Aaug: ['A', 'C#', 'E'],
-//     B: ['B', 'D#', 'F#'],
-//     Bm: ['B', 'D', 'F#'],
-//     Baug: ['B', 'D#', 'G'],
-//     Bdim: ['B', 'D', 'F'],
-// }
-
-// let acordeIngresado = prompt("Ingrese acorde");
-
-// function elementosComunes(array1, array2) {
-//     return array1.filter(elemento => array2.includes(elemento));
-// }
-
-
-// function acordesRelacionados(acordeIngresado) {
-//     let acordeBuscado = acordes[acordeIngresado];
-//     let acordesEncontrados = [];
-
-//     for (let acorde in acordes) {
-//         let notasComunes = elementosComunes(acordeBuscado, acordes[acorde]);
-//         if (notasComunes.length >= 2) {
-//             acordesEncontrados.push(acorde);
-//         }
-//     }
-
-//     return acordesEncontrados;
-
-// }
-
-// let resultado = acordesRelacionados(acordeIngresado);
-// console.log(resultado);
-
-
-// Ingrese un acorde
-// Dm
-// Acordes relacionados
-// F, G, A, Bdim
-// (#) => SIGNIFICA "SOSTENIDO"
-// (b) => SIGNIFICA "BEMOL"
-// (|) => SIGNIFICA "O"
 const notas = [
-    "A",
-    "A#",
-    "B",
     "C",
     "C#",
     "D",
@@ -75,25 +8,11 @@ const notas = [
     "F#",
     "G",
     "G#",
+    "A",
+    "A#",
+    "B",
 ]
 
-const notasEsp = {
-    "A": "LA",
-    "A#": "LA#",
-    "B": "SI", //NO EXISTE "SI#" NI "DOb"
-    "C": "DO",
-    "C#": "DO#",
-    "D": "RE",
-    "D#": "RE#",
-    "E": "MI", // NO EXISTE "MI#" NI "FAb"
-    "F": "FA",
-    "F#": "FA#",
-    "G": "SOL",
-    "G#": "SOL#",
-    //LAS NOTAS SE REPITEN INFINITAMENTE....
-}
-
-console.log(notasEsp['G#'])
 const intervalos = {
     "tonica": 0,
     "segundaMenor": 1,
@@ -234,8 +153,41 @@ if (tonalidadGuardada && escalaGuardada) {
     }
 }
 
+function renderizarTeclado() {
+    const container = document.querySelector('.keyboard-container')
 
 
-// console.log(tomarTonica("C"));
-// console.log(notasParaEscala('C', escalaMayor))
-// console.log(notasParaEscala('F#', escalaFrigia))
+    let naturals = document.querySelector('.keyboard-container .naturals')
+    if (!naturals) {
+        naturals = document.createElement('div')
+        naturals.className = 'row naturals'
+        container.append(naturals)
+    }
+
+
+    let accidentals = document.querySelector('.keyboard-container .accidentals')
+    if (!accidentals) {
+        accidentals = document.createElement('div')
+        accidentals.className = 'row accidentals'
+        container.append(accidentals)
+    }
+    
+    [...notas, ...notas].forEach((nota, indiceNota) => {
+        const accidental = document.createElement('div')
+        
+        if (nota.length > 1) {
+            accidental.className = 'key ' + nota
+            if (['F#', 'C#'].includes(nota)) {
+                accidental.className = accidental.className + ' spacer'
+            }
+        } else {
+            const natural = document.createElement('div')
+            natural.className = 'key ' + nota
+            naturals.appendChild(natural)
+        }
+
+        accidentals.appendChild(accidental)
+    });
+}
+
+renderizarTeclado()
