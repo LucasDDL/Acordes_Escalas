@@ -232,6 +232,15 @@ if (tonalidadGuardada && escalaGuardada) {
     if (botonTonica) {
         botonTonica.style.backgroundColor = 'green';
     }
+
+    if (tonalidadGuardada) {
+        selectTonica.value = tonalidadGuardada;
+    }
+
+    if (escalaGuardada) {
+        selectEscala.value = escalaGuardada;
+    }
+
 }
 
 
