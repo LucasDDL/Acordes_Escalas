@@ -28,6 +28,9 @@ body {}
 .key {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .naturals .key {
@@ -35,6 +38,8 @@ body {}
     height: 120px;
     border: 1px solid black;
     background-color: white;
+    text-align: center;
+
 }
 
 .accidentals {
@@ -53,6 +58,8 @@ body {}
 .accidentals .key {
     background-color: black;
     border-color: black;
+    align-items: center;
+    color: aliceblue;
 }
 
 .accidentals .spacer {

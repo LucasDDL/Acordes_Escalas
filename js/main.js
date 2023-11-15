@@ -97,22 +97,9 @@ button.addEventListener('click', (evento) => {
 
     console.log(escala);
 
-
-    // for (const intervalo in escala) {
-    //     let boton = document.getElementById(escala[intervalo]);
-    //     if (boton) {
-    //         boton.style.backgroundColor = 'red'
-    //     }
-    // }
-
-    // let botonTonica = document.getElementById(tonica);
-    // if (botonTonica) {
-    //     botonTonica.style.backgroundColor = 'green'
-    // }
     resaltarEscala(escala)
 
-    localStorage.setItem('tonalidad', tonica);
-    localStorage.setItem('escala', nombreEscala);
+    localStorage.setItem('escala', JSON.stringify({ tonica, nombreEscala }));
 
 
 })
@@ -135,13 +122,14 @@ for (const nombreEscala in escalas) {
 }
 
 function cargarEscalaGuardada() {
-    const tonalidadGuardada = localStorage.getItem('tonalidad')
+
     const escalaGuardada = localStorage.getItem('escala')
 
-    if (tonalidadGuardada && escalaGuardada) {
-        const escala = notasParaEscala(tonalidadGuardada, escalaGuardada)
-        selectTonica.value = tonalidadGuardada;
-        selectEscala.value = escalaGuardada;
+    if (escalaGuardada) {
+        const escalaParseada = JSON.parse(escalaGuardada)
+        const escala = notasParaEscala(escalaParseada.tonica, escalaParseada.nombreEscala)
+        selectTonica.value = escalaParseada.tonica;
+        selectEscala.value = escalaParseada.nombreEscala;
 
         resaltarEscala(escala)
     }
@@ -170,6 +158,7 @@ function renderizarTeclado() {
         const accidental = document.createElement('div')
 
         if (nota.length > 1) {
+            accidental.innerText = nota
             accidental.className = 'key ' + nota.replace('#', '-sost')
             if (['F#', 'C#'].includes(nota)) {
                 accidental.className = accidental.className + ' spacer'
@@ -177,6 +166,7 @@ function renderizarTeclado() {
         } else {
             const natural = document.createElement('div')
             natural.className = 'key ' + nota
+            natural.innerText = nota
             naturals.appendChild(natural)
         }
 
@@ -185,7 +175,7 @@ function renderizarTeclado() {
 }
 
 function resaltarEscala(escala) {
-    // ... tusha
+
     const keys = document.querySelectorAll('.key');
 
 
