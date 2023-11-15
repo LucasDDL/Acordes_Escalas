@@ -98,17 +98,18 @@ button.addEventListener('click', (evento) => {
     console.log(escala);
 
 
-    for (const intervalo in escala) {
-        let boton = document.getElementById(escala[intervalo]);
-        if (boton) {
-            boton.style.backgroundColor = 'red'
-        }
-    }
+    // for (const intervalo in escala) {
+    //     let boton = document.getElementById(escala[intervalo]);
+    //     if (boton) {
+    //         boton.style.backgroundColor = 'red'
+    //     }
+    // }
 
-    let botonTonica = document.getElementById(tonica);
-    if (botonTonica) {
-        botonTonica.style.backgroundColor = 'green'
-    }
+    // let botonTonica = document.getElementById(tonica);
+    // if (botonTonica) {
+    //     botonTonica.style.backgroundColor = 'green'
+    // }
+    resaltarEscala(escala)
 
     localStorage.setItem('tonalidad', tonica);
     localStorage.setItem('escala', nombreEscala);
@@ -139,23 +140,23 @@ const escalaGuardada = localStorage.getItem('escala')
 if (tonalidadGuardada && escalaGuardada) {
     const escala = notasParaEscala(tonalidadGuardada, escalaGuardada)
 
-    for (const intervalo in escala) {
-        let boton = document.getElementById(escala[intervalo]);
-        if (boton) {
-            boton.style.backgroundColor = 'red';
-        }
-    }
+    // for (const intervalo in escala) {
+    //     let boton = document.getElementById(escala[intervalo]);
+    //     if (boton) {
+    //         boton.style.backgroundColor = 'red';
+    //     }
+    // }
 
-    // Resaltar la tonica
-    let botonTonica = document.getElementById(tonalidadGuardada);
-    if (botonTonica) {
-        botonTonica.style.backgroundColor = 'green';
-    }
+    // // Resaltar la tonica
+    // let botonTonica = document.getElementById(tonalidadGuardada);
+    // if (botonTonica) {
+    //     botonTonica.style.backgroundColor = 'green';
+    // }
+    resaltarEscala(escala)
 }
 
 function renderizarTeclado() {
     const container = document.querySelector('.keyboard-container')
-
 
     let naturals = document.querySelector('.keyboard-container .naturals')
     if (!naturals) {
@@ -171,12 +172,12 @@ function renderizarTeclado() {
         accidentals.className = 'row accidentals'
         container.append(accidentals)
     }
-    
-    [...notas, ...notas].forEach((nota, indiceNota) => {
+
+    [...notas, ...notas].forEach((nota) => {
         const accidental = document.createElement('div')
-        
+
         if (nota.length > 1) {
-            accidental.className = 'key ' + nota
+            accidental.className = 'key ' + nota.replace('#', '-sost')
             if (['F#', 'C#'].includes(nota)) {
                 accidental.className = accidental.className + ' spacer'
             }
@@ -188,6 +189,10 @@ function renderizarTeclado() {
 
         accidentals.appendChild(accidental)
     });
+}
+
+function resaltarEscala(escala) {
+    // ... tusha
 }
 
 renderizarTeclado()

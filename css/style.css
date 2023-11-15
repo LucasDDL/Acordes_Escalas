@@ -30,7 +30,7 @@ body {}
     border-bottom-right-radius: 8px;
 }
 
-.naturals div {
+.naturals .key {
     width: 44px;
     height: 120px;
     border: 1px solid black;
