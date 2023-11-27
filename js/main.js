@@ -1,3 +1,15 @@
+const url = "../acordes.json"
+let acordes;
+fetch(url)
+    .then(resp => resp.json())
+    .then(json => {
+        acordes = json
+        console.log(acordes)
+        renderizarTeclado()
+        cargarEscalaGuardada()
+    })
+
+
 const notas = [
     "C",
     "C#",
@@ -61,6 +73,15 @@ const escalas = {
     frigia: ["tonica", "segundaMenor", "terceraMenor", 'cuartaJusta', 'quintaJusta', 'sextaMenor', 'septimaMenor'],
 }
 
+const acordesEscalaMayor = {
+    "tonica": "triadasMayores",
+    "segundaMayor": "triadasMenores",
+    "terceraMayor": "triadasMenores",
+    "cuartaJusta": "triadasMayores",
+    "quintaJusta": "triadasMayores",
+    "sextaMayor": "triadasMenores",
+    "septimaMayor": "acordesDiminuidos"
+}
 
 function notasParaEscala(tonica, escala) {
     let tonalidad = tomarTonica(tonica)
@@ -97,11 +118,11 @@ button.addEventListener('click', (evento) => {
 
     console.log(escala);
 
-    resaltarEscala(escala)
+
 
     localStorage.setItem('escala', JSON.stringify({ tonica, nombreEscala }));
 
-
+    cargarEscalaGuardada()
 })
 
 const selectTonica = document.querySelector('#tonica');
@@ -124,7 +145,8 @@ for (const nombreEscala in escalas) {
 function cargarEscalaGuardada() {
 
     const escalaGuardada = localStorage.getItem('escala')
-
+    const divAcordes = document.getElementById("acordes");
+    divAcordes.innerHTML = "";
     if (escalaGuardada) {
         const escalaParseada = JSON.parse(escalaGuardada)
         const escala = notasParaEscala(escalaParseada.tonica, escalaParseada.nombreEscala)
@@ -132,6 +154,23 @@ function cargarEscalaGuardada() {
         selectEscala.value = escalaParseada.nombreEscala;
 
         resaltarEscala(escala)
+        if (escalaParseada.nombreEscala === "mayor") {
+
+            for (const intervalo in escala) {
+                let nota = escala[intervalo];
+                console.log(nota)
+
+                const tipoAcorde = acordesEscalaMayor[intervalo]
+                const acorde = acordes[tipoAcorde][nota];
+                console.log(acorde)
+                const imgAcordes = document.createElement("img");
+                imgAcordes.src = encodeURIComponent(`./${acorde.imagen}`)
+                divAcordes.append(imgAcordes);
+
+            }
+
+
+        }
     }
 
 }
@@ -178,7 +217,6 @@ function resaltarEscala(escala) {
 
     const keys = document.querySelectorAll('.key');
 
-
     keys.forEach(key => {
 
         key.style.backgroundColor = '';
@@ -198,11 +236,13 @@ function resaltarEscala(escala) {
                 }
 
             }
+
         }
     });
 
-
 }
 
-renderizarTeclado()
-cargarEscalaGuardada()
+
+
+
+
