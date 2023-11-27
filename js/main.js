@@ -1,3 +1,25 @@
+// https://tonejs.github.io/examples/monoSynth
+const synth = new Tone.PolySynth(Tone.MonoSynth, {
+    volume: -6,
+    oscillator: {
+        type: "square8"
+    },
+    envelope: {
+        attack: 0.05,
+        decay: 0.3,
+        sustain: 0.4,
+        release: 0.8,
+    },
+    filterEnvelope: {
+        attack: 0.001,
+        decay: 0.7,
+        sustain: 0.1,
+        release: 0.8,
+        baseFrequency: 300,
+        octaves: 4
+    }
+}).toDestination();
+
 const url = "../acordes.json"
 let acordes;
 fetch(url)
@@ -83,6 +105,19 @@ const acordesEscalaMayor = {
     "septimaMayor": "acordesDiminuidos"
 }
 
+const acordesParaEscalas = {
+    mayor: acordesEscalaMayor,
+    frigia: {
+        "tonica": "triadasMayores",
+        "segundaMayor": "triadasMenores",
+        "terceraMayor": "triadasMenores",
+        "cuartaJusta": "triadasMayores",
+        "quintaJusta": "triadasMayores",
+        "sextaMayor": "triadasMenores",
+        "septimaMayor": "acordesDiminuidos"
+    }
+}
+
 function notasParaEscala(tonica, escala) {
     let tonalidad = tomarTonica(tonica)
     let notasEnEscala = escalas[escala].reduce((obj, intervalo) => {
@@ -165,6 +200,17 @@ function cargarEscalaGuardada() {
                 console.log(acorde)
                 const imgAcordes = document.createElement("img");
                 imgAcordes.src = encodeURIComponent(`./${acorde.imagen}`)
+                imgAcordes.onclick = () => {
+                    console.log(acorde.notas)
+                    // TODO: reemplazar notaOctavada por array de notas (con octava, ej: C5 G#4)
+                    const notaOctavada = `${nota}4`
+                    const ahora = Tone.now()
+                    // reproducir nota en tiempo de inicio (ahora)
+                    synth.triggerAttack(notaOctavada, ahora)
+                    // silenciar nota 1 segundo despues de arrancar a reproducir
+                    synth.triggerRelease(notaOctavada, ahora + 1)
+                }
+
                 divAcordes.append(imgAcordes);
 
             }
