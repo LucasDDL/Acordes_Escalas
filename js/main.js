@@ -105,6 +105,19 @@ const acordesEscalaMayor = {
     "septimaMayor": "acordesDiminuidos"
 }
 
+const acordesParaEscalas = {
+    mayor: acordesEscalaMayor,
+    frigia: {
+        "tonica": "triadasMayores",
+        "segundaMayor": "triadasMenores",
+        "terceraMayor": "triadasMenores",
+        "cuartaJusta": "triadasMayores",
+        "quintaJusta": "triadasMayores",
+        "sextaMayor": "triadasMenores",
+        "septimaMayor": "acordesDiminuidos"
+    }
+}
+
 function notasParaEscala(tonica, escala) {
     let tonalidad = tomarTonica(tonica)
     let notasEnEscala = escalas[escala].reduce((obj, intervalo) => {
