@@ -5,51 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"
+        integrity="sha512-Siyxh4gyNM5SaERNa9BOZSPcu/auHyFUWn9OVFD7MxI3/dVPQklE7tfqS+pLmPHF1zo6UdDaJAp/thihrf0c7w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <div id="contenedor">
+    <div style="text-align: center; padding: 24px;" id="contenedor">
         <label for="tonica">Ingrese tónica</label>
         <select name="tonica" id="tonica"></select>
         <label for="escala">Ingrese escala</label>
         <select name="escala" id="escala"></select>
         <button type="button" id="submit">Aceptar</button>
     </div>
-    <div class="keyboard-container">
-        <div class="naturals-container">
 
-            <button id="C">
-                <p>C</p>
-            </button>
-            <button id="D">
-                <p>D</p>
-            </button>
-            <button id="E">
-                <p>E</p>
-            </button>
-            <button id="F">
-                <p>F</p>
-            </button>
-            <button id="G">
-                <p>G</p>
-            </button>
-            <button id="A">
-                <p>A</p>
-            </button>
-            <button id="B">
-                <p>B</p>
-            </button>
-
-        </div>
-        <div class="accidentals-container">
-            <button class="C" id="C#">C#</button>
-            <button class="D" id="D#">D#</button>
-            <button class="F" id="F#">F#</button>
-            <button class="G" id="G#">G#</button>
-            <button class="A" id="A#">A#</button>
+    <div class="container">
+        <div class="keyboard-container">
         </div>
     </div>
+    <div id="acordes">
+    </div>
+
     <script src="./js/main.js"></script>
 </body>
 

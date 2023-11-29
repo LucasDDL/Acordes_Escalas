@@ -1,71 +1,40 @@
-// const acordes = {
-//     C: ['C', 'E', 'G'],
-//     Caug: ['C', 'E', 'G#'],
-//     Cm: ['C', 'Eb', 'G'],
-//     Cdim: ['C', 'Eb', 'Gb'],
-//     D: ['D', 'F#', 'A'],
-//     Dm: ['D', 'F', 'A'],
-//     Ddim: ['D', 'F', 'Ab'],
-//     Daug: ['D', 'F#', 'A#'],
-//     E: ['E', 'G#', 'B'],
-//     Eaug: ['E', 'G#', 'C'],
-//     Em: ['E', 'G', 'B'],
-//     Edim: ['E', 'G', 'Bb'],
-//     F: ['F', 'A', 'C'],
-//     Fm: ['F', 'Ab', 'C'],
-//     Fdim: ['F', 'Ab', 'Cb'],
-//     Faug: ['F', 'A', 'C#'],
-//     G: ['G', 'B', 'D'],
-//     Gm: ['G', 'Bb', 'D'],
-//     Gdim: ['G', 'Bb', 'Db'],
-//     Gaug: ['G', 'B', 'D#'],
-//     A: ['A', 'C#', 'E'],
-//     Am: ['A', 'C', 'E'],
-//     Adim: ['A', 'C', 'Eb'],
-//     Aaug: ['A', 'C#', 'E'],
-//     B: ['B', 'D#', 'F#'],
-//     Bm: ['B', 'D', 'F#'],
-//     Baug: ['B', 'D#', 'G'],
-//     Bdim: ['B', 'D', 'F'],
-// }
-
-// let acordeIngresado = prompt("Ingrese acorde");
-
-// function elementosComunes(array1, array2) {
-//     return array1.filter(elemento => array2.includes(elemento));
-// }
 
 
-// function acordesRelacionados(acordeIngresado) {
-//     let acordeBuscado = acordes[acordeIngresado];
-//     let acordesEncontrados = [];
+// https://tonejs.github.io/examples/monoSynth
+const synth = new Tone.PolySynth(Tone.MonoSynth, {
+    volume: -6,
+    oscillator: {
+        type: "square8"
+    },
+    envelope: {
+        attack: 0.05,
+        decay: 0.3,
+        sustain: 0.4,
+        release: 0.8,
+    },
+    filterEnvelope: {
+        attack: 0.001,
+        decay: 0.7,
+        sustain: 0.1,
+        release: 0.8,
+        baseFrequency: 300,
+        octaves: 4
+    }
+}).toDestination();
 
-//     for (let acorde in acordes) {
-//         let notasComunes = elementosComunes(acordeBuscado, acordes[acorde]);
-//         if (notasComunes.length >= 2) {
-//             acordesEncontrados.push(acorde);
-//         }
-//     }
-
-//     return acordesEncontrados;
-
-// }
-
-// let resultado = acordesRelacionados(acordeIngresado);
-// console.log(resultado);
+const url = "https://raw.githubusercontent.com/LucasDDL/Acordes_Escalas/tuyabokita/acordes.json"
+let acordes;
+fetch(url)
+    .then(resp => resp.json())
+    .then(json => {
+        acordes = json
+        console.log(acordes)
+        renderizarTeclado()
+        cargarEscalaGuardada()
+    })
 
 
-// Ingrese un acorde
-// Dm
-// Acordes relacionados
-// F, G, A, Bdim
-// (#) => SIGNIFICA "SOSTENIDO"
-// (b) => SIGNIFICA "BEMOL"
-// (|) => SIGNIFICA "O"
 const notas = [
-    "A",
-    "A#",
-    "B",
     "C",
     "C#",
     "D",
@@ -75,25 +44,11 @@ const notas = [
     "F#",
     "G",
     "G#",
+    "A",
+    "A#",
+    "B",
 ]
 
-const notasEsp = {
-    "A": "LA",
-    "A#": "LA#",
-    "B": "SI", //NO EXISTE "SI#" NI "DOb"
-    "C": "DO",
-    "C#": "DO#",
-    "D": "RE",
-    "D#": "RE#",
-    "E": "MI", // NO EXISTE "MI#" NI "FAb"
-    "F": "FA",
-    "F#": "FA#",
-    "G": "SOL",
-    "G#": "SOL#",
-    //LAS NOTAS SE REPITEN INFINITAMENTE....
-}
-
-console.log(notasEsp['G#'])
 const intervalos = {
     "tonica": 0,
     "segundaMenor": 1,
@@ -142,6 +97,28 @@ const escalas = {
     frigia: ["tonica", "segundaMenor", "terceraMenor", 'cuartaJusta', 'quintaJusta', 'sextaMenor', 'septimaMenor'],
 }
 
+const acordesEscalaMayor = {
+    "tonica": "triadasMayores",
+    "segundaMayor": "triadasMenores",
+    "terceraMayor": "triadasMenores",
+    "cuartaJusta": "triadasMayores",
+    "quintaJusta": "triadasMayores",
+    "sextaMayor": "triadasMenores",
+    "septimaMayor": "acordesDiminuidos"
+}
+
+const acordesParaEscalas = {
+    mayor: acordesEscalaMayor,
+    frigia: {
+        "tonica": "triadasMayores",
+        "segundaMayor": "triadasMenores",
+        "terceraMayor": "triadasMenores",
+        "cuartaJusta": "triadasMayores",
+        "quintaJusta": "triadasMayores",
+        "sextaMayor": "triadasMenores",
+        "septimaMayor": "acordesDiminuidos"
+    }
+}
 
 function notasParaEscala(tonica, escala) {
     let tonalidad = tomarTonica(tonica)
@@ -179,22 +156,10 @@ button.addEventListener('click', (evento) => {
     console.log(escala);
 
 
-    for (const intervalo in escala) {
-        let boton = document.getElementById(escala[intervalo]);
-        if (boton) {
-            boton.style.backgroundColor = 'red'
-        }
-    }
 
-    let botonTonica = document.getElementById(tonica);
-    if (botonTonica) {
-        botonTonica.style.backgroundColor = 'green'
-    }
+    localStorage.setItem('escala', JSON.stringify({ tonica, nombreEscala }));
 
-    localStorage.setItem('tonalidad', tonica);
-    localStorage.setItem('escala', nombreEscala);
-
-
+    cargarEscalaGuardada()
 })
 
 const selectTonica = document.querySelector('#tonica');
@@ -214,34 +179,33 @@ for (const nombreEscala in escalas) {
     selectEscala.append(option);
 }
 
-const tonalidadGuardada = localStorage.getItem('tonalidad')
-const escalaGuardada = localStorage.getItem('escala')
+function cargarEscalaGuardada() {
 
-if (tonalidadGuardada && escalaGuardada) {
-    const escala = notasParaEscala(tonalidadGuardada, escalaGuardada)
-
-    for (const intervalo in escala) {
-        let boton = document.getElementById(escala[intervalo]);
-        if (boton) {
-            boton.style.backgroundColor = 'red';
-        }
-    }
-
-    // Resaltar la tonica
-    let botonTonica = document.getElementById(tonalidadGuardada);
-    if (botonTonica) {
-        botonTonica.style.backgroundColor = 'green';
-    }
-
-    if (tonalidadGuardada) {
-        selectTonica.value = tonalidadGuardada;
-    }
-
+    const escalaGuardada = localStorage.getItem('escala')
+    const divAcordes = document.getElementById("acordes");
+    divAcordes.innerHTML = "";
     if (escalaGuardada) {
-        selectEscala.value = escalaGuardada;
-    }
+        const escalaParseada = JSON.parse(escalaGuardada)
+        const escala = notasParaEscala(escalaParseada.tonica, escalaParseada.nombreEscala)
+        selectTonica.value = escalaParseada.tonica;
+        selectEscala.value = escalaParseada.nombreEscala;
 
-}
+        resaltarEscala(escala)
+        if (escalaParseada.nombreEscala === "mayor") {
+
+            for (const intervalo in escala) {
+                let boton = document.getElementById(escala[intervalo]);
+                if (boton) {
+                    boton.style.backgroundColor = 'red';
+                }
+            }
+
+            // Resaltar la tonica
+            let botonTonica = document.getElementById(tonalidadGuardada);
+            if (botonTonica) {
+                botonTonica.style.backgroundColor = 'green';
+            }
+        }
 
 
 

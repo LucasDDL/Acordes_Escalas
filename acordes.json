@@ -1,0 +1,296 @@
+{
+    "triadasMayores": {
+        "C": {
+            "notas": {
+                "fundamental": "C",
+                "tercera": "E",
+                "quinta": "G"
+            },
+            "imagen": "images/DoMayor.png"
+        },
+        "C#": {
+            "notas": {
+                "fundamental": "C#",
+                "tercera": "F",
+                "quinta": "G#"
+            },
+            "imagen": "images/Do#Mayor.png"
+        },
+        "D": {
+            "notas": {
+                "fundamental": "D",
+                "tercera": "F#",
+                "quinta": "A"
+            },
+            "imagen": "images/ReMayor.png"
+        },
+        "D#": {
+            "notas": {
+                "fundamental": "D#",
+                "tercera": "G",
+                "quinta": "A#"
+            },
+            "imagen": "images/Re#Mayor.png"
+        },
+        "E": {
+            "notas": {
+                "fundamental": "E",
+                "tercera": "G#",
+                "quinta": "B"
+            },
+            "imagen": "images/MiMayor.png"
+        },
+        "F": {
+            "notas": {
+                "fundamental": "F",
+                "tercera": "A",
+                "quinta": "C"
+            },
+            "imagen": "images/FaMayor.png"
+        },
+        "F#": {
+            "notas": {
+                "fundamental": "F#",
+                "tercera": "A#",
+                "quinta": "C#"
+            },
+            "imagen": "images/Fa#Mayor.png"
+        },
+        "G": {
+            "notas": {
+                "fundamental": "G",
+                "tercera": "B",
+                "quinta": "D"
+            },
+            "imagen": "images/SolMayor.png"
+        },
+        "G#": {
+            "notas": {
+                "fundamental": "G#",
+                "tercera": "C",
+                "quinta": "D#"
+            },
+            "imagen": "images/Sol#Mayor.png"
+        },
+        "A": {
+            "notas": {
+                "fundamental": "A",
+                "tercera": "C#",
+                "quinta": "E"
+            },
+            "imagen": "images/LaMayor.png"
+        },
+        "A#": {
+            "notas": {
+                "fundamental": "A#",
+                "tercera": "D",
+                "quinta": "F"
+            },
+            "imagen": "images/La#Mayor.png"
+        },
+        "B": {
+            "notas": {
+                "fundamental": "B",
+                "tercera": "D#",
+                "quinta": "F#"
+            },
+            "imagen": "images/SiMayor.png"
+        }
+    },
+    "triadasMenores": {
+        "C": {
+            "notas": {
+                "fundamental": "C",
+                "tercera": "D#",
+                "quinta": "G"
+            },
+            "imagen": "images/DoMenor.png"
+        },
+        "C#": {
+            "notas": {
+                "fundamental": "C#",
+                "tercera": "E",
+                "quinta": "G#"
+            },
+            "imagen": "images/Do#Menor.png"
+        },
+        "D": {
+            "notas": {
+                "fundamental": "D",
+                "tercera": "F",
+                "quinta": "A"
+            },
+            "imagen": "images/ReMenor.png"
+        },
+        "D#": {
+            "notas": {
+                "fundamental": "D#",
+                "tercera": "F#",
+                "quinta": "A#"
+            },
+            "imagen": "images/Re#Menor.png"
+        },
+        "E": {
+            "notas": {
+                "fundamental": "E",
+                "tercera": "G",
+                "quinta": "B"
+            },
+            "imagen": "images/MiMenor.png"
+        },
+        "F": {
+            "notas": {
+                "fundamental": "F",
+                "tercera": "G#",
+                "quinta": "C"
+            },
+            "imagen": "images/FaMenor.png"
+        },
+        "F#": {
+            "notas": {
+                "fundamental": "F#",
+                "tercera": "A",
+                "quinta": "C#"
+            },
+            "imagen": "images/Fa#Menor.png"
+        },
+        "G": {
+            "notas": {
+                "fundamental": "G",
+                "tercera": "A#",
+                "quinta": "D"
+            },
+            "imagen": "images/SolMenor.png"
+        },
+        "G#": {
+            "notas": {
+                "fundamental": "G#",
+                "tercera": "B",
+                "quinta": "D#"
+            },
+            "imagen": "images/Sol#Menor.png"
+        },
+        "A": {
+            "notas": {
+                "fundamental": "A",
+                "tercera": "C",
+                "quinta": "E"
+            },
+            "imagen": "images/LaMenor.png"
+        },
+        "A#": {
+            "notas": {
+                "fundamental": "A#",
+                "tercera": "C#",
+                "quinta": "F"
+            },
+            "imagen": "images/La#Menor.png"
+        },
+        "B": {
+            "notas": {
+                "fundamental": "B",
+                "tercera": "D",
+                "quinta": "F#"
+            },
+            "imagen": "images/SiMenor.png"
+        }
+    },
+    "acordesDiminuidos": {
+        "C": {
+            "notas": {
+                "fundamental": "C",
+                "tercera": "D#",
+                "quinta": "A#"
+            },
+            "imagen": "images/DoDim.png"
+        },
+        "C#": {
+            "notas": {
+                "fundamental": "C#",
+                "tercera": "E",
+                "quinta": "G"
+            },
+            "imagen": "images/Do#Dim.png"
+        },
+        "D": {
+            "notas": {
+                "fundamental": "D",
+                "tercera": "F",
+                "quinta": "G#"
+            },
+            "imagen": "images/ReDim.png"
+        },
+        "D#": {
+            "notas": {
+                "fundamental": "D#",
+                "tercera": "F#",
+                "quinta": "A"
+            },
+            "imagen": "images/Re#Dim.png"
+        },
+        "E": {
+            "notas": {
+                "fundamental": "E",
+                "tercera": "G",
+                "quinta": "A#"
+            },
+            "imagen": "images/MiDim.png"
+        },
+        "F": {
+            "notas": {
+                "fundamental": "F",
+                "tercera": "G#",
+                "quinta": "B"
+            },
+            "imagen": "images/FaDim.png"
+        },
+        "F#": {
+            "notas": {
+                "fundamental": "F#",
+                "tercera": "A",
+                "quinta": "C"
+            },
+            "imagen": "images/Fa#Dim.png"
+        },
+        "G": {
+            "notas": {
+                "fundamental": "G",
+                "tercera": "A#",
+                "quinta": "C#"
+            },
+            "imagen": "images/SolDim.png"
+        },
+        "G#": {
+            "notas": {
+                "fundamental": "G#",
+                "tercera": "B",
+                "quinta": "D"
+            },
+            "imagen": "images/Sol#Dim.png"
+        },
+        "A": {
+            "notas": {
+                "fundamental": "A",
+                "tercera": "C",
+                "quinta": "D#"
+            },
+            "imagen": "images/LaDim.png"
+        },
+        "A#": {
+            "notas": {
+                "fundamental": "A#",
+                "tercera": "C#",
+                "quinta": "E"
+            },
+            "imagen": "images/La#Dim.png"
+        },
+        "B": {
+            "notas": {
+                "fundamental": "B",
+                "tercera": "D",
+                "quinta": "F"
+            },
+            "imagen": "images/SiDim.png"
+        }
+    }
+}
