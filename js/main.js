@@ -1,3 +1,5 @@
+
+
 // https://tonejs.github.io/examples/monoSynth
 const synth = new Tone.PolySynth(Tone.MonoSynth, {
     volume: -6,
@@ -20,7 +22,7 @@ const synth = new Tone.PolySynth(Tone.MonoSynth, {
     }
 }).toDestination();
 
-const url = "../acordes.json"
+const url = "https://raw.githubusercontent.com/LucasDDL/Acordes_Escalas/tuyabokita/acordes.json"
 let acordes;
 fetch(url)
     .then(resp => resp.json())
@@ -198,17 +200,18 @@ function cargarEscalaGuardada() {
                 const tipoAcorde = acordesEscalaMayor[intervalo]
                 const acorde = acordes[tipoAcorde][nota];
                 console.log(acorde)
+                console.log(acorde.notas)
                 const imgAcordes = document.createElement("img");
                 imgAcordes.src = encodeURIComponent(`./${acorde.imagen}`)
                 imgAcordes.onclick = () => {
-                    console.log(acorde.notas)
+
                     // TODO: reemplazar notaOctavada por array de notas (con octava, ej: C5 G#4)
-                    const notaOctavada = `${nota}4`
+                    const notasAcordeOctavada = Object.values(acorde.notas).map(nota => `${nota}4`)
                     const ahora = Tone.now()
                     // reproducir nota en tiempo de inicio (ahora)
-                    synth.triggerAttack(notaOctavada, ahora)
+                    synth.triggerAttack(notasAcordeOctavada, ahora)
                     // silenciar nota 1 segundo despues de arrancar a reproducir
-                    synth.triggerRelease(notaOctavada, ahora + 1)
+                    synth.triggerRelease(notasAcordeOctavada, ahora + 1)
                 }
 
                 divAcordes.append(imgAcordes);
